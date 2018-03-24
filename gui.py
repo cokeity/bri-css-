@@ -3,16 +3,14 @@ import sys, pygame
 class GUI(object):
     #def init(self):
 
-    def __init__(self, width=600, height=600, fps=50, title="Alex User Response"):
-        self.width = width
-        self.height = height
+    def __init__(self, fps=50, title="bri{css}"):
         self.fps = fps
         self.title = title
         pygame.init()
 
     def run(self):
         clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode((self.width, self.height))#,HWSURFACE|DOUBLEBUF|RESIZABLE)
+        self.screen = pygame.display.set_mode((300,500))#,HWSURFACE|DOUBLEBUF|RESIZABLE)
         # set the title of the window
         pygame.display.set_caption(self.title)
 
