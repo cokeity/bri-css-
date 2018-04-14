@@ -1,4 +1,5 @@
 import sys, pygame, colors
+from tab import TAB
 
 class GUI(object):
     def init(self):
@@ -35,11 +36,12 @@ class GUI(object):
     def run(self, WIDTH = 1000, HEIGHT = 500): 
         clock = pygame.time.Clock()
         # self.screen is the main Surface we're working with 
-        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))#,HWSURFACE|DOUBLEBUF|RESIZABLE)
+        self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) #,HWSURFACE|DOUBLEBUF|RESIZABLE)
         self.screen.fill(colors.WHITE())
-        self.tab = pygame.Surface((500,500))
-        self.tab.fill(colors.BLUE())
-        self.screen.blit(self.tab,(500,0))
+        #self.tab = pygame.Surface((500,500))
+        self.tabs = TAB(500,500)
+        #self.tab.fill(colors.BLUE())
+        self.screen.blit(self.tabs.get_tabsurface(),(500,0))
         #self.screen.fill((0,0,255))
         pygame.display.update()
         #self.tab.blit(self.screen,(500,0))
