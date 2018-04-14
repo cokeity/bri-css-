@@ -1,11 +1,11 @@
-import sys, pygame
+import sys, pygame, colors
 
 class GUI(object):
     def init(self):
         pass
 
     def mousePressed(self, x, y):
-        print("%d %d", x, y);
+        print("%d %d" %(x,y));
 
     def mouseReleased(self, x, y):
         pass
@@ -21,6 +21,7 @@ class GUI(object):
 
     def timerFired(self, dt):
         pass
+        
 
     def redrawAll(self, screen):
         pass
@@ -30,9 +31,19 @@ class GUI(object):
         self.title = title
         pygame.init()
 
-    def run(self):
+    #@TODO make width and height resizable 
+    def run(self, WIDTH = 1000, HEIGHT = 500): 
         clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode((300,500))#,HWSURFACE|DOUBLEBUF|RESIZABLE)
+        # self.screen is the main Surface we're working with 
+        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))#,HWSURFACE|DOUBLEBUF|RESIZABLE)
+        self.screen.fill(colors.WHITE())
+        self.tab = pygame.Surface((500,500))
+        self.tab.fill(colors.BLUE())
+        self.screen.blit(self.tab,(500,0))
+        #self.screen.fill((0,0,255))
+        pygame.display.update()
+        #self.tab.blit(self.screen,(500,0))
+        #self.screen.blit(self.tab,(0,0))
         # set the title of the window
         pygame.display.set_caption(self.title)
 
@@ -44,7 +55,7 @@ class GUI(object):
         isRunnning = True
         while isRunnning:
             time = clock.tick(self.fps)
-            #self.timerFired(time)
+            self.timerFired(time)
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     self.mousePressed(*(event.pos))
