@@ -8,3 +8,6 @@ def MINTGREEN():
 
 def BLUE():
 	return pygame.Color(0,0,255)
+
+def RED():
+	return pygame.Color(255,0,0)

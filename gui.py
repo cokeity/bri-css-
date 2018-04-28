@@ -3,10 +3,19 @@ from tab import TAB
 
 class GUI(object):
     def init(self):
+        self.tab_mode = "html"
         pass
 
     def mousePressed(self, x, y):
         print("%d %d" %(x,y));
+        if (self.tab_mode == "html"):
+            self.tabs.show_css()
+            self.tab_mode = "css"
+        elif (self.tab_mode == "css"):
+            self.tabs.show_html()
+            self.tab_mode = "html"
+        self.screen.blit(self.tabs.get_tabsurface(),(500,0))
+        pygame.display.update()
 
     def mouseReleased(self, x, y):
         pass
@@ -23,14 +32,15 @@ class GUI(object):
     def timerFired(self, dt):
         pass
         
-
     def redrawAll(self, screen):
+
         pass
 
     def __init__(self, fps=50, title="bri{css}"):
         self.fps = fps
         self.title = title
         pygame.init()
+        self.init()
 
     #@TODO make width and height resizable 
     def run(self, WIDTH = 1000, HEIGHT = 500): 
@@ -38,14 +48,10 @@ class GUI(object):
         # self.screen is the main Surface we're working with 
         self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) #,HWSURFACE|DOUBLEBUF|RESIZABLE)
         self.screen.fill(colors.WHITE())
-        #self.tab = pygame.Surface((500,500))
+        #create the right screen
         self.tabs = TAB(500,500)
-        #self.tab.fill(colors.BLUE())
         self.screen.blit(self.tabs.get_tabsurface(),(500,0))
-        #self.screen.fill((0,0,255))
         pygame.display.update()
-        #self.tab.blit(self.screen,(500,0))
-        #self.screen.blit(self.tab,(0,0))
         # set the title of the window
         pygame.display.set_caption(self.title)
 
@@ -79,5 +85,6 @@ class GUI(object):
                     isRunnning= False
             #self.screen.fill(self.bgColor)
             #self.redrawAll(self.screen)
+            #pygame.display.flip()
 
         pygame.quit()
